@@ -7,3 +7,6 @@ def register():
     Pool.register(
         invoice.Invoice,
         module='account_invoice_credit_note_related_invoice', type_='model')
+    Pool.register(
+        invoice.CreditInvoice,
+        module='account_invoice_credit_note_related_invoice', type_='wizard')
