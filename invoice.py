@@ -3,8 +3,9 @@
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
+from trytond.transaction import Transaction
 
-__all__ = ['Invoice']
+__all__ = ['Invoice', 'CreditInvoice']
 
 
 class Invoice:
@@ -31,3 +32,27 @@ class Invoice:
                     result[invoice.id] = line.origin.invoice.id
                     break
         return result
+
+
+class CreditInvoice:
+    __metaclass__ = PoolMeta
+    __name__ = 'account.invoice.credit'
+
+    @classmethod
+    def __setup__(cls):
+        super(CreditInvoice, cls).__setup__()
+        cls._error_messages.update({
+                'invoice_non_posted': ('You can not credit '
+                'invoice "%s" because it is not posted.'),
+            })
+
+    def do_credit(self, action):
+        pool = Pool()
+        Invoice = pool.get('account.invoice')
+
+        invoices = Invoice.browse(Transaction().context['active_ids'])
+        for invoice in invoices:
+            if invoice.state not in ('posted', 'paid'):
+                self.raise_user_error('invoice_non_posted',
+                    (invoice.rec_name,))
+        return super(CreditInvoice, self).do_credit(action)
