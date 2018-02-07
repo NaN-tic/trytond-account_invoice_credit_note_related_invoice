@@ -1,0 +1,11 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:account.invoice.credit:"
+msgid "You can not credit invoice \"%s\" because it is not posted."
+msgstr "No podeu abonar la factura \"%s\" perquè no està confirmada."
+
+msgctxt "field:account.invoice,related_invoice:"
+msgid "Related Invoice"
+msgstr "Factura relacionada"
