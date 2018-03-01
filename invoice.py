@@ -2,7 +2,6 @@
 # copyright notices and license terms.
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
-from trytond.pyson import Eval
 from trytond.transaction import Transaction
 
 __all__ = ['Invoice', 'CreditInvoice']
@@ -11,11 +10,9 @@ __all__ = ['Invoice', 'CreditInvoice']
 class Invoice:
     __metaclass__ = PoolMeta
     __name__ = 'account.invoice'
-    related_invoice = fields.Function(fields.Many2One('account.invoice',
-            'Related Invoice', states={
-                'invisible': Eval('invoice_type').in_(
-                    ['out_invoice', 'in_invoice']),
-                }, depends=['invoice_type']), 'get_related_invoice')
+    related_invoice = fields.Function(
+        fields.Many2One('account.invoice', 'Related Invoice'),
+        'get_related_invoice')
 
     @classmethod
     def get_related_invoice(cls, invoices, name):
@@ -44,7 +41,7 @@ class CreditInvoice:
         cls._error_messages.update({
                 'invoice_non_posted': ('You can not credit '
                 'invoice "%s" because it is not posted.'),
-            })
+                })
 
     def do_credit(self, action):
         pool = Pool()
