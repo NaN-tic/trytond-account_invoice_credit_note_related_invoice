@@ -40,8 +40,8 @@ class CreditInvoice:
         super(CreditInvoice, cls).__setup__()
         cls._error_messages.update({
                 'invoice_non_posted': ('You can not credit '
-                'invoice "%s" because it is not posted.'),
-                })
+                'invoice "%s" because it is not posted or paid.'),
+            })
 
     def do_credit(self, action):
         pool = Pool()
