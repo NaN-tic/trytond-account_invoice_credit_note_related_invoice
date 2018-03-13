@@ -8,4 +8,4 @@ msgstr "No puede abonar la factura \"%s\" porque no está confirmada o pagada."
 
 msgctxt "field:account.invoice,related_invoice:"
 msgid "Related Invoice"
-msgstr ""
+msgstr "Factura relacionada"
