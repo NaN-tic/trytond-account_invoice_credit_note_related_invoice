@@ -3,8 +3,8 @@ msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:account.invoice.credit:"
-msgid "You can not credit invoice \"%s\" because it is not posted."
-msgstr "No puede abonar la factura \"%s\" porque no está confirmada."
+msgid "You can not credit invoice \"%s\" because it is not posted or paid."
+msgstr "No puede abonar la factura \"%s\" porque no está confirmada o pagada."
 
 msgctxt "field:account.invoice,related_invoice:"
 msgid "Related Invoice"
