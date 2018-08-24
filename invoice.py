@@ -7,8 +7,7 @@ from trytond.transaction import Transaction
 __all__ = ['Invoice', 'CreditInvoice']
 
 
-class Invoice:
-    __metaclass__ = PoolMeta
+class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
     related_invoice = fields.Function(
         fields.Many2One('account.invoice', 'Related Invoice'),
@@ -31,8 +30,7 @@ class Invoice:
         return result
 
 
-class CreditInvoice:
-    __metaclass__ = PoolMeta
+class CreditInvoice(metaclass=PoolMeta):
     __name__ = 'account.invoice.credit'
 
     @classmethod
