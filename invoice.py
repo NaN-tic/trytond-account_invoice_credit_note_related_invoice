@@ -3,6 +3,8 @@
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
 __all__ = ['Invoice', 'CreditInvoice']
 
@@ -32,14 +34,6 @@ class Invoice(metaclass=PoolMeta):
 
 class CreditInvoice(metaclass=PoolMeta):
     __name__ = 'account.invoice.credit'
-
-    @classmethod
-    def __setup__(cls):
-        super(CreditInvoice, cls).__setup__()
-        cls._error_messages.update({
-                'invoice_non_posted': ('You can not credit '
-                'invoice "%s" because it is not posted or paid.'),
-            })
 
     def do_credit(self, action):
         pool = Pool()
