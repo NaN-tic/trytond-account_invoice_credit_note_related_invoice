@@ -42,6 +42,6 @@ class CreditInvoice(metaclass=PoolMeta):
         invoices = Invoice.browse(Transaction().context['active_ids'])
         for invoice in invoices:
             if invoice.state not in ('posted', 'paid'):
-                self.raise_user_error('invoice_non_posted',
-                    (invoice.rec_name,))
+                raise UserError(gettext('account_invoice_credit_note_related_invoice.invoice_non_posted',
+                    invoice=invoice.rec_name))
         return super(CreditInvoice, self).do_credit(action)
