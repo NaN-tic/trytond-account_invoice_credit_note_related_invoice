@@ -27,8 +27,9 @@ class Invoice(metaclass=PoolMeta):
                 continue
             for line in invoice.lines:
                 if isinstance(line.origin, InvoiceLine):
-                    result[invoice.id] = line.origin.invoice.id
-                    break
+                    if line.origin and line.origin.invoice:
+                        result[invoice.id] = line.origin.invoice.id
+                        break
         return result
 
 
