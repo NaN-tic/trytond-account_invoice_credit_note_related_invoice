@@ -23,8 +23,9 @@ class Invoice(metaclass=PoolMeta):
         invoice_ids = [i.id for i in invoices]
         result = {}.fromkeys(invoice_ids, None)
         for invoice in invoices:
-            if '_invoice' in invoice.invoice_type_criteria():
+            if '_invoice' in invoice._sequence_field:
                 continue
+
             for line in invoice.lines:
                 if isinstance(line.origin, InvoiceLine):
                     if line.origin and line.origin.invoice:
